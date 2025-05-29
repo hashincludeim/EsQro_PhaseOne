@@ -764,7 +764,9 @@ contract EsqroEscrow {
                     <ul class="terms-list">
                         <li>Funds will be held securely in regulated Qatar bank accounts during the contract period</li>
                         <li>Platform tokens representing your deposit will be locked in the smart contract until conditions are met</li>
+                        <li>Auto-generated smart contracts require admin approval before deployment to ensure compliance and security</li>
                         <li>Milestone completion requires approval from both parties before fund release</li>
+                        <li>Tokens will only be transferred after both client and contractor mutually agree on milestone completion</li>
                         <li>All transactions comply with Qatar's Digital Assets Framework 2024 and Sharia principles</li>
                         <li>Dispute resolution follows Esqro's mediation process with escalation options</li>
                         <li>Transaction fees apply as per Esqro's published fee schedule</li>
@@ -780,12 +782,7 @@ contract EsqroEscrow {
                         <label for="termsAccept">I have read and agree to the terms and conditions above</label>
                     </div>
                     
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="shariaCompliant" name="shariaCompliant" required>
-                        <label for="shariaCompliant">I confirm this contract structure is Sharia-compliant for my business</label>
-                    </div>
-                    
-                    <p style="color: #155724; margin: 1rem 0;">Please sign below to create and activate your smart contract:</p>
+                    <p style="color: #155724; margin: 1rem 0;">Please sign below to submit your contract for admin approval:</p>
                     
                     <canvas class="signature-pad" id="signaturePad" width="400" height="150"></canvas>
                     
@@ -793,7 +790,7 @@ contract EsqroEscrow {
                         <button type="button" class="btn btn-secondary" onclick="clearSignature()">Clear Signature</button>
                         <button type="button" class="btn btn-danger" onclick="goToStep(2)">← Previous Step</button>
                         <button type="button" class="btn btn-success" onclick="submitContract()" id="submitBtn" disabled>
-                            🚀 Create Smart Contract
+                            📋 Submit for Admin Approval
                         </button>
                     </div>
                 </div>
@@ -928,7 +925,6 @@ contract EsqroEscrow {
         
         function checkSubmitButton() {
             const termsAccept = document.getElementById('termsAccept').checked;
-            const shariaCompliant = document.getElementById('shariaCompliant').checked;
             const canvas = document.getElementById('signaturePad');
             const ctx = canvas.getContext('2d');
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -943,7 +939,7 @@ contract EsqroEscrow {
             }
             
             const submitBtn = document.getElementById('submitBtn');
-            if (termsAccept && shariaCompliant && hasSignature) {
+            if (termsAccept && hasSignature) {
                 submitBtn.disabled = false;
                 submitBtn.style.opacity = '1';
             } else {
@@ -955,16 +951,16 @@ contract EsqroEscrow {
         function submitContract() {
             // Show loading state
             const submitBtn = document.getElementById('submitBtn');
-            submitBtn.innerHTML = '⏳ Creating Contract...';
+            submitBtn.innerHTML = '⏳ Submitting for Review...';
             submitBtn.disabled = true;
             
-            // Simulate contract creation process
+            // Simulate contract submission process
             setTimeout(() => {
-                showNotification('Smart contract created successfully! Redirecting to dashboard...', 'success');
+                showNotification('Contract submitted successfully! Admin will review and approve within 24 hours. You will be notified via email.', 'success');
                 
                 setTimeout(() => {
                     window.location.href = 'client-demo.html';
-                }, 2000);
+                }, 3000);
             }, 3000);
         }
         
@@ -981,7 +977,6 @@ contract EsqroEscrow {
         // Add event listeners for checkboxes
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('termsAccept').addEventListener('change', checkSubmitButton);
-            document.getElementById('shariaCompliant').addEventListener('change', checkSubmitButton);
         });
         
         // Form validation for step 1
