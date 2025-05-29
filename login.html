@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Esqro Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+        }
+        
+        .login-left {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .login-logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .login-tagline {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .feature-list {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .feature-list li {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .feature-icon {
+            font-size: 1.2rem;
+        }
+        
+        .login-right {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-subtitle {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+        
+        .login-form {
+            width: 100%;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        .form-group input.error {
+            border-color: #e74c3c;
+            background: #fdf2f2;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .remember-me input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .forgot-password {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+        
+        .login-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .signup-btn {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            color: #3498db;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .signup-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .back-link a {
+            color: #7f8c8d;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-link a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+        
+        .demo-credentials {
+            background: #e8f5e8;
+            border: 2px solid #27ae60;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .demo-title {
+            color: #155724;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-info {
+            color: #155724;
+            font-size: 0.9rem;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .loading-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .login-container {
+                grid-template-columns: 1fr;
+                margin: 1rem;
+                max-width: 400px;
+            }
+            
+            .login-left {
+                padding: 2rem;
+                min-height: 200px;
+            }
+            
+            .login-right {
+                padding: 2rem;
+            }
+            
+            .login-logo {
+                font-size: 2rem;
+            }
+            
+            .feature-list {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-left">
+            <div class="login-logo">ESQRO</div>
+            <p class="login-tagline">Secure Smart Escrow Platform for Qatar's Business Ecosystem</p>
+            <ul class="feature-list">
+                <li><span class="feature-icon">🛡️</span> Sharia-Compliant Transactions</li>
+                <li><span class="feature-icon">🔗</span> Smart Contract Automation</li>
+                <li><span class="feature-icon">⚖️</span> Regulatory Compliant</li>
+                <li><span class="feature-icon">📊</span> Real-time Transparency</li>
+            </ul>
+        </div>
+        
+        <div class="login-right">
+            <div class="login-header">
+                <h2 class="login-title">Welcome Back</h2>
+                <p class="login-subtitle">Sign in to your Esqro account</p>
+            </div>
+            
+            <div class="demo-credentials">
+                <div class="demo-title">🔑 Demo Credentials</div>
+                <div class="demo-info">
+                    <strong>Username:</strong> Qatar Construction<br>
+                    <strong>Password:</strong> password
+                </div>
+            </div>
+            
+            <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Company Name</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your company name" required>
+                    <div class="error-message" id="usernameError">Please enter a valid company name</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <div class="error-message" id="passwordError">Please enter your password</div>
+                </div>
+                
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn" id="loginBtn">
+                    Sign In to Dashboard
+                </button>
+                
+                <div style="text-align: center; margin: 1rem 0; color: #7f8c8d;">
+                    ── or ──
+                </div>
+                
+                <button type="button" class="signup-btn" onclick="handleSignUp()">
+                    Create New Account
+                </button>
+            </form>
+            
+            <div class="back-link">
+                <a href="index.html">← Back to Homepage</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Authenticating your credentials...</p>
+            <p style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0.5rem;">Please wait</p>
+        </div>
+    </div>
+    
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            // Clear previous errors
+            clearErrors();
+            
+            // Basic validation
+            if (!username || !password) {
+                if (!username) showError('username', 'Company name is required');
+                if (!password) showError('password', 'Password is required');
+                return;
+            }
+            
+            // Show loading state
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Signing In...';
+            loadingOverlay.style.display = 'flex';
+            
+            // Simulate authentication delay
+            setTimeout(() => {
+                // Check credentials
+                if (username.toLowerCase() === 'qatar construction' && password === 'password') {
+                    // Success - redirect to dashboard
+                    showSuccessMessage();
+                    setTimeout(() => {
+                        window.location.href = 'client-demo.html';
+                    }, 1500);
+                } else {
+                    // Failed authentication
+                    hideLoading();
+                    showError('username', 'Invalid company name or password');
+                    showError('password', 'Please check your credentials and try again');
+                    
+                    // Shake animation for form
+                    const loginForm = document.getElementById('loginForm');
+                    loginForm.style.animation = 'shake 0.5s ease-in-out';
+                    setTimeout(() => {
+                        loginForm.style.animation = '';
+                    }, 500);
+                }
+            }, 2000);
+        }
+        
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(fieldId + 'Error');
+            
+            field.classList.add('error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        
+        function clearErrors() {
+            const errorFields = ['username', 'password'];
+            errorFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                const errorElement = document.getElementById(fieldId + 'Error');
+                
+                field.classList.remove('error');
+                errorElement.style.display = 'none';
+            });
+        }
+        
+        function hideLoading() {
+            const loginBtn = document.getElementById('loginBtn');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            loginBtn.disabled = false;
+            loginBtn.textContent = 'Sign In to Dashboard';
+            loadingOverlay.style.display = 'none';
+        }
+        
+        function showSuccessMessage() {
+            const loadingContent = document.querySelector('.loading-content');
+            loadingContent.innerHTML = `
+                <div style="font-size: 3rem; color: #27ae60; margin-bottom: 1rem;">✅</div>
+                <p style="color: #27ae60; font-weight: bold;">Login Successful!</p>
+                <p style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0.5rem;">Redirecting to your dashboard...</p>
+            `;
+        }
+        
+        function showForgotPassword() {
+            alert('For demo purposes, please use the provided credentials:\nCompany: Qatar Construction\nPassword: password');
+        }
+        
+        function handleSignUp() {
+            // Show sign up message
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const loadingContent = document.querySelector('.loading-content');
+            
+            loadingContent.innerHTML = `
+                <div style="font-size: 3rem; color: #3498db; margin-bottom: 1rem;">📝</div>
+                <p style="color: #3498db; font-weight: bold;">Sign Up Coming Soon!</p>
+                <p style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0.5rem; line-height: 1.5;">
+                    Account registration will be available in the full version.<br>
+                    For now, please use the demo credentials to explore the platform.
+                </p>
+                <button onclick="closeSignUpMessage()" style="
+                    margin-top: 1rem; 
+                    padding: 0.5rem 1rem; 
+                    background: #3498db; 
+                    color: white; 
+                    border: none; 
+                    border-radius: 5px; 
+                    cursor: pointer;
+                ">Got it</button>
+            `;
+            
+            loadingOverlay.style.display = 'flex';
+        }
+        
+        function closeSignUpMessage() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+            
+            // Reset loading content for future use
+            const loadingContent = document.querySelector('.loading-content');
+            loadingContent.innerHTML = `
+                <div class="loading-spinner"></div>
+                <p>Authenticating your credentials...</p>
+                <p style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0.5rem;">Please wait</p>
+            `;
+        }
+        
+        // Add shake animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Auto-fill demo credentials when demo info is clicked
+        document.querySelector('.demo-credentials').addEventListener('click', function() {
+            document.getElementById('username').value = 'Qatar Construction';
+            document.getElementById('password').value = 'password';
+        });
+        
+        // Clear errors when user starts typing
+        document.getElementById('username').addEventListener('input', clearErrors);
+        document.getElementById('password').addEventListener('input', clearErrors);
+    </script>
+</body>
+</html>
