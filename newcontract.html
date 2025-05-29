@@ -548,7 +548,7 @@
             </div>
             <div class="progress-step">
                 <div class="step-circle step-pending" id="step2">2</div>
-                <div class="step-label">Smart Contract</div>
+                <div class="step-label">Payment Details</div>
             </div>
             <div class="progress-step">
                 <div class="step-circle step-pending" id="step3">3</div>
@@ -643,12 +643,47 @@
             <!-- Step 2: Smart Contract Preview -->
             <div class="form-section" id="section2" style="display: none;">
                 <h2 class="section-title">
+                    <span class="section-icon">💰</span>
+                    Payment Terms Configuration
+                </h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="milestoneCount">Number of Milestones <span class="required">*</span></label>
+                        <select id="milestoneCount" name="milestoneCount" onchange="generateMilestoneFields()" required>
+                            <option value="">Select number of milestones</option>
+                            <option value="1">1 Milestone (Lump Sum)</option>
+                            <option value="2">2 Milestones</option>
+                            <option value="3">3 Milestones</option>
+                            <option value="4">4 Milestones</option>
+                            <option value="5">5 Milestones</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="totalMilestoneAmount">Total Amount Verification</label>
+                        <input type="text" id="totalMilestoneAmount" name="totalMilestoneAmount" readonly placeholder="QAR 0" style="background: #f8f9fa; color: #6c757d;">
+                    </div>
+                </div>
+                
+                <div id="milestonesContainer" style="display: none;">
+                    <h3 style="color: #2c3e50; margin: 2rem 0 1rem 0; border-bottom: 2px solid #e9ecef; padding-bottom: 0.5rem;">
+                        📋 Milestone Breakdown
+                    </h3>
+                    <div id="milestoneFields"></div>
+                    
+                    <div id="milestoneValidation" style="margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none;">
+                        <div id="validationMessage"></div>
+                    </div>
+                </div>
+                
+                <h2 class="section-title" style="margin-top: 3rem;">
                     <span class="section-icon">🔗</span>
-                    Smart Contract Preview
+                    Smart Contract Preview for Admin Purposes Only
                 </h2>
                 
                 <p style="color: #5a6c7d; margin-bottom: 1.5rem;">
-                    Review the automatically generated smart contract based on your specifications:
+                    This section is visible only to administrators and for demonstration purposes:
                 </p>
                 
                 <div class="smart-contract-preview" id="smartContractCode">
@@ -902,18 +937,119 @@ contract EsqroEscrow {
             document.getElementById('uploadedFile').style.display = 'none';
         }
         
-        function generateSmartContract() {
-            const title = document.getElementById('contractTitle').value || '[Contract Title]';
-            const contractor = document.getElementById('contractorName').value || '[Contractor Name]';
-            const value = document.getElementById('contractValue').value || '[Contract Value]';
-            const paymentType = document.getElementById('paymentType').value || '[Payment Type]';
+        function generateMilestoneFields() {
+            const milestoneCount = parseInt(document.getElementById('milestoneCount').value);
+            const container = document.getElementById('milestonesContainer');
+            const fieldsContainer = document.getElementById('milestoneFields');
+            const contractValue = parseFloat(document.getElementById('contractValue').value) || 0;
             
-            const contractCode = document.getElementById('smartContractCode');
-            contractCode.innerHTML = contractCode.innerHTML
-                .replace(/Office Building Construction Phase 2/g, title)
-                .replace(/\[Contractor Name\]/g, contractor)
-                .replace(/\[Contract Value\]/g, value)
-                .replace(/\[Payment Type\]/g, paymentType.toUpperCase());
+            if (!milestoneCount) {
+                container.style.display = 'none';
+                return;
+            }
+            
+            container.style.display = 'block';
+            fieldsContainer.innerHTML = '';
+            
+            for (let i = 1; i <= milestoneCount; i++) {
+                const milestoneDiv = document.createElement('div');
+                milestoneDiv.className = 'milestone-item';
+                milestoneDiv.style.cssText = `
+                    border: 2px solid #e9ecef;
+                    border-radius: 10px;
+                    padding: 1.5rem;
+                    margin-bottom: 1rem;
+                    background: #f8f9fa;
+                `;
+                
+                const suggestedAmount = contractValue / milestoneCount;
+                
+                milestoneDiv.innerHTML = `
+                    <h4 style="color: #2c3e50; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="background: #3498db; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">${i}</span>
+                        Milestone ${i}
+                    </h4>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="milestone${i}Description">Description <span class="required">*</span></label>
+                            <input type="text" id="milestone${i}Description" name="milestone${i}Description" 
+                                placeholder="e.g., Foundation work completion" required 
+                                onchange="updateSmartContract()">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="milestone${i}Amount">Amount (QAR) <span class="required">*</span></label>
+                            <input type="number" id="milestone${i}Amount" name="milestone${i}Amount" 
+                                placeholder="${suggestedAmount.toFixed(2)}" step="0.01" required 
+                                onchange="validateMilestoneAmounts()">
+                        </div>
+                    </div>
+                `;
+                
+                fieldsContainer.appendChild(milestoneDiv);
+            }
+            
+            validateMilestoneAmounts();
+        }
+        
+        function validateMilestoneAmounts() {
+            const milestoneCount = parseInt(document.getElementById('milestoneCount').value);
+            const contractValue = parseFloat(document.getElementById('contractValue').value) || 0;
+            const validationDiv = document.getElementById('milestoneValidation');
+            const validationMessage = document.getElementById('validationMessage');
+            const totalAmountField = document.getElementById('totalMilestoneAmount');
+            
+            if (!milestoneCount) return;
+            
+            let totalMilestoneAmount = 0;
+            let hasEmptyFields = false;
+            
+            for (let i = 1; i <= milestoneCount; i++) {
+                const amountField = document.getElementById(`milestone${i}Amount`);
+                if (amountField) {
+                    const amount = parseFloat(amountField.value) || 0;
+                    totalMilestoneAmount += amount;
+                    if (!amountField.value) hasEmptyFields = true;
+                }
+            }
+            
+            totalAmountField.value = `QAR ${totalMilestoneAmount.toLocaleString()}`;
+            
+            if (hasEmptyFields) {
+                validationDiv.style.display = 'none';
+                return;
+            }
+            
+            validationDiv.style.display = 'block';
+            
+            if (Math.abs(totalMilestoneAmount - contractValue) < 0.01) {
+                validationDiv.style.background = '#d4edda';
+                validationDiv.style.border = '2px solid #27ae60';
+                validationMessage.innerHTML = `
+                    <div style="color: #155724; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.2rem;">✅</span>
+                        <strong>Perfect!</strong> Milestone amounts match the total contract value.
+                    </div>
+                `;
+            } else {
+                const difference = contractValue - totalMilestoneAmount;
+                validationDiv.style.background = '#f8d7da';
+                validationDiv.style.border = '2px solid #dc3545';
+                validationMessage.innerHTML = `
+                    <div style="color: #721c24; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.2rem;">⚠️</span>
+                        <div>
+                            <strong>Amount Mismatch!</strong><br>
+                            Difference: QAR ${Math.abs(difference).toLocaleString()} 
+                            ${difference > 0 ? '(under-allocated)' : '(over-allocated)'}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        function updateSmartContract() {
+            // This function will be called when milestone descriptions change
+            // to update the smart contract preview
         }
         
         function clearSignature() {
@@ -1006,8 +1142,53 @@ contract EsqroEscrow {
                     return;
                 }
             }
+            
+            if (currentStep === 2 && step > 2) {
+                if (!validateStep2()) {
+                    showNotification('Please complete milestone configuration', 'error');
+                    return;
+                }
+            }
+            
             originalGoToStep(step);
         };
+        
+        function validateStep2() {
+            const milestoneCount = parseInt(document.getElementById('milestoneCount').value);
+            const contractValue = parseFloat(document.getElementById('contractValue').value) || 0;
+            
+            if (!milestoneCount) {
+                return false;
+            }
+            
+            let totalMilestoneAmount = 0;
+            for (let i = 1; i <= milestoneCount; i++) {
+                const amountField = document.getElementById(`milestone${i}Amount`);
+                const descField = document.getElementById(`milestone${i}Description`);
+                
+                if (!amountField?.value || !descField?.value) {
+                    return false;
+                }
+                
+                totalMilestoneAmount += parseFloat(amountField.value) || 0;
+            }
+            
+            return Math.abs(totalMilestoneAmount - contractValue) < 0.01;
+        }
+        
+        function generateSmartContract() {
+            const title = document.getElementById('contractTitle').value || '[Contract Title]';
+            const contractor = document.getElementById('contractorName').value || '[Contractor Name]';
+            const value = document.getElementById('contractValue').value || '[Contract Value]';
+            const paymentType = document.getElementById('paymentType').value || '[Payment Type]';
+            
+            const contractCode = document.getElementById('smartContractCode');
+            contractCode.innerHTML = contractCode.innerHTML
+                .replace(/Office Building Construction Phase 2/g, title)
+                .replace(/\[Contractor Name\]/g, contractor)
+                .replace(/\[Contract Value\]/g, value)
+                .replace(/\[Payment Type\]/g, paymentType.toUpperCase());
+        }
     </script>
 </body>
 </html>
