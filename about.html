@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Esqro Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: #f5f6fa;
+            color: #2c3e50;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 120px 2rem 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            padding: 60px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .content-card h3 {
+            color: #3498db;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-card p {
+            color: #5a6c7d;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .placeholder-text {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 3rem;
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 40px 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ESQRO</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#compliance">Compliance</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="implementation.html">Implementation</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-container">
+            <h1>About Esqro</h1>
+            <p>Building the future of secure B2B transactions in Qatar</p>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="content-card">
+            <h3>🚀 Our Mission</h3>
+            <p>Esqro is revolutionizing B2B transactions in Qatar by creating the region's first Sharia-compliant smart escrow platform. We combine cutting-edge blockchain technology with traditional business practices to deliver secure, transparent, and automated transaction solutions that meet the unique needs of Qatar's dynamic business environment.</p>
+        </div>
+        
+        <div class="content-card">
+            <h3>🎯 Our Vision</h3>
+            <p>To become the leading digital escrow platform in the Middle East, empowering businesses with innovative financial technology while maintaining full compliance with Islamic finance principles and local regulatory frameworks. We envision a future where complex B2B transactions are executed seamlessly, transparently, and with complete trust between all parties.</p>
+        </div>
+        
+        <div class="content-card">
+            <h3>👥 Our Team</h3>
+            <p>Our founding team brings together the perfect combination of business expertise and technical innovation, uniquely positioning us to bridge the gap between emerging blockchain technology and practical business applications in Qatar's evolving digital economy.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #3498db;">
+                    <h4 style="color: #2c3e50; margin-bottom: 1rem;">🎓 Business Leadership</h4>
+                    <p style="color: #5a6c7d; font-size: 0.95rem; line-height: 1.6;">Our business founder brings extensive international experience with a Masters Degree in International Business, having successfully navigated complex B2B transactions, regulatory environments, and market dynamics across multiple jurisdictions. This deep understanding of real-world business challenges provides crucial insights into the practical requirements for an effective escrow solution that truly serves enterprise needs.</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <h4 style="color: #2c3e50; margin-bottom: 1rem;">⚡ Technical Innovation</h4>
+                    <p style="color: #5a6c7d; font-size: 0.95rem; line-height: 1.6;">Our technology founder holds a Masters Degree in Financial Technology from a prestigious Russell Group university and brings deep fintech and blockchain development expertise. With hands-on experience building financial technology platforms, smart contract architecture, and tokenization systems, this technical foundation ensures we can create a robust, secure, and scalable platform capable of handling enterprise-level transactions while maintaining regulatory compliance.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <h3>🏛️ Why Qatar?</h3>
+            <p>Qatar represents the perfect market for our innovative escrow solution. As a rapidly growing economy with ambitious digital transformation goals under Qatar National Vision 2030, the country offers a unique opportunity to introduce cutting-edge financial technology. The strong regulatory framework, including the recently introduced Digital Assets Framework 2024, provides clear guidelines for blockchain-based financial services while ensuring compliance and consumer protection.</p>
+            <p>Qatar's thriving construction, consulting, and government contracting sectors frequently require milestone-based payments and secure escrow services, creating a natural demand for our platform. The business community's openness to innovation, combined with the need for Sharia-compliant financial solutions, positions Esqro to become an essential part of Qatar's fintech ecosystem.</p>
+        </div>
+        
+        <div class="content-card">
+            <h3>🔮 Our Competitive Advantage</h3>
+            <p>What sets Esqro apart is our unique combination of deep business understanding and technical excellence. We don't just build technology – we solve real business problems. Our team's complementary expertise allows us to:</p>
+            <ul style="margin: 1rem 0; padding-left: 2rem; color: #5a6c7d;">
+                <li>Understand the complex regulatory and cultural requirements of Qatar's business environment</li>
+                <li>Design user-friendly interfaces that hide blockchain complexity from end users</li>
+                <li>Ensure full compliance with both Islamic finance principles and modern regulatory frameworks</li>
+                <li>Build scalable, enterprise-grade technology that can handle high-value B2B transactions</li>
+                <li>Bridge the gap between traditional business practices and innovative financial technology</li>
+            </ul>
+            <p>This positions us ideally to pioneer this new category of financial services in Qatar's evolving digital economy, creating lasting value for businesses while contributing to the country's technological advancement.</p>
+        </div>
+    </section>
+</body>
+</html>
