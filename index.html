@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+            .prev-btn {
+                left: -60px;
+            }
+            
+            .next-btn {
+                right: -60px;
+            }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -132,6 +138,208 @@
             color: #2c3e50;
             transform: translateY(-3px);
         }
+
+        /* Process Flow Animation Section */
+        .process-flow {
+            background: white;
+            padding: 80px 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .process-flow h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .process-subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 3rem;
+        }
+        
+        .process-steps {
+            position: relative;
+            height: 450px;
+            margin: 3rem auto;
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 400px;
+        }
+        
+        .process-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(52, 152, 219, 0.9);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .process-control:hover {
+            background: #2980b9;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .process-control:disabled {
+            background: rgba(149, 165, 166, 0.5);
+            cursor: not-allowed;
+            transform: translateY(-50%) scale(0.9);
+        }
+        
+        .prev-btn {
+            left: -80px;
+        }
+        
+        .next-btn {
+            right: -80px;
+        }
+        
+        .process-step {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 2rem;
+            position: absolute;
+            width: 350px;
+            min-height: 320px;
+            transform: translateX(150vw);
+            opacity: 0;
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid transparent;
+            left: 50%;
+            top: 50%;
+            margin-left: -175px;
+            margin-top: -160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .process-step.animate {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .process-step.active {
+            border-color: #3498db;
+            box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
+            transform: translateX(0) scale(1.05);
+        }
+        
+        .process-step.exit-left {
+            transform: translateX(-150vw);
+            opacity: 0;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem auto;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .step-number::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(52, 152, 219, 0.2);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.6s ease;
+        }
+        
+        .process-step.active .step-number::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .step-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .process-step.active .step-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .step-description {
+            color: #5a6c7d;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+
+        
+        /* Floating animation for step icons */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .process-step.active .step-icon {
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        /* Progress bar */
+        .progress-bar-container {
+            position: relative;
+            width: 100%;
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #27ae60);
+            width: 0%;
+            transition: width 2s ease;
+            border-radius: 2px;
+        }
+        
+
         
         .features {
             background: white;
@@ -274,6 +482,19 @@
                 align-items: center;
             }
             
+            .process-steps {
+                height: 400px;
+                max-width: 320px;
+            }
+            
+            .process-step {
+                width: 300px;
+                margin-left: -150px;
+                margin-top: -140px;
+                padding: 1.5rem;
+                min-height: 280px;
+            }
+            
             .features-grid {
                 grid-template-columns: 1fr;
             }
@@ -281,31 +502,11 @@
             .stats-container {
                 grid-template-columns: repeat(2, 1fr);
             }
-        }
-        
-        .demo-section {
-            background: #f8f9fa;
-            padding: 60px 2rem;
-            text-align: center;
-        }
-        
-        .demo-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .demo-section h2 {
-            color: #2c3e50;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .demo-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
+            
+            .flow-controls {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -315,12 +516,13 @@
             <a href="#" class="logo">ESQRO</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#process">How It Works</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#compliance">Compliance</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="faqs.html">FAQs</a></li>
                 <li><a href="implementation.html">Implementation</a></li>
-                <li><a href="#demo">Demo</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </div>
     </nav>
@@ -330,9 +532,62 @@
             <h1>ESQRO</h1>
             <p>World's First Sharia-Compliant Smart Escrow Platform for B2B Transactions</p>
             <div class="cta-buttons">
-                <a href="login.html" class="btn btn-primary">Log In</a>
-                <a href="#" class="btn btn-secondary" onclick="showArchitecture()">Technical Architecture</a>
+                <a href="login.html" class="btn btn-primary">Get Started</a>
+                <a href="#process" class="btn btn-secondary">See How It Works</a>
             </div>
+        </div>
+    </section>
+    
+    <section class="process-flow" id="process">
+        <div class="process-container">
+            <h2>How Esqro Works</h2>
+            <p class="process-subtitle">Secure, automated escrow transactions with full transparency</p>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            
+            <div class="process-steps" id="processSteps">
+                <button class="process-control prev-btn" id="prevBtn" onclick="previousStep()">‹</button>
+                <button class="process-control next-btn" id="nextBtn" onclick="nextStep()">›</button>
+                
+                <div class="process-step" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📋</div>
+                    <h3 class="step-title">Create Contract</h3>
+                    <p class="step-description">Create your smart escrow contract with clear terms, milestones, and payment schedules. Both parties digitally sign to begin.</p>
+                </div>
+                
+                <div class="process-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">💰</div>
+                    <h3 class="step-title">Secure Deposit</h3>
+                    <p class="step-description">Transfer funds to Esqro's regulated escrow account. Your money is held securely until contract conditions are met.</p>
+                </div>
+                
+                <div class="process-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">📊</div>
+                    <h3 class="step-title">Monitor Progress</h3>
+                    <p class="step-description">Track milestone completion in real-time through your dashboard. Both parties stay informed of progress and requirements.</p>
+                </div>
+                
+                <div class="process-step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">✅</div>
+                    <h3 class="step-title">Approve Milestones</h3>
+                    <p class="step-description">Review and approve completed work or deliverables. The system ensures conditions are met before releasing funds.</p>
+                </div>
+                
+                <div class="process-step" data-step="5">
+                    <div class="step-number">5</div>
+                    <div class="step-icon">⚡</div>
+                    <h3 class="step-title">Automatic Payment</h3>
+                    <p class="step-description">Once approved, payments are automatically released to the contractor's account. Fast, secure, and transparent.</p>
+                </div>
+            </div>
+            
+
         </div>
     </section>
     
@@ -408,17 +663,6 @@
         </div>
     </section>
     
-    <section class="demo-section" id="demo">
-        <div class="demo-container">
-            <h2>Platform Demonstrations</h2>
-            <p>Explore how Esqro revolutionizes B2B transactions in Qatar</p>
-            <div class="demo-buttons">
-                <a href="login.html" class="btn btn-primary">Log In</a>
-                <a href="#" class="btn btn-secondary" onclick="showArchitecture()" style="background: #27ae60; border-color: #27ae60;">Technical Architecture</a>
-            </div>
-        </div>
-    </section>
-    
     <footer class="footer">
         <div class="footer-container">
             <p>&copy; 2025 Esqro Platform. Building the future of secure B2B transactions in Qatar.</p>
@@ -427,14 +671,181 @@
     </footer>
     
     <script>
-        function showArchitecture() {
-            // This would normally navigate to the architecture page
-            window.open('architecture.html', '_blank');
+        let animationInterval;
+        let inactivityTimeout;
+        let currentStep = 0;
+        let isAnimating = false;
+        let userInteracted = false;
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show first step initially
+            setTimeout(() => {
+                showStep(1);
+                updateControlButtons();
+            }, 500);
+            
+            // Auto-start animation when section comes into view
+            const processSection = document.getElementById('process');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !isAnimating && !userInteracted) {
+                        setTimeout(() => {
+                            startAnimation();
+                        }, 1000);
+                    }
+                });
+            });
+            observer.observe(processSection);
+        });
+        
+        function showStep(stepNumber) {
+            const steps = document.querySelectorAll('.process-step');
+            const progressBar = document.getElementById('progressBar');
+            
+            // Hide all steps
+            steps.forEach((step, index) => {
+                const stepNum = index + 1;
+                step.classList.remove('active', 'animate', 'exit-left');
+                
+                if (stepNum < stepNumber) {
+                    // Previous steps exit to the left
+                    step.classList.add('exit-left');
+                } else if (stepNum === stepNumber) {
+                    // Current step is active and visible
+                    step.classList.add('animate', 'active');
+                } else {
+                    // Future steps remain off-screen to the right
+                    step.classList.remove('animate', 'active', 'exit-left');
+                }
+            });
+            
+            // Update progress bar
+            if (stepNumber <= steps.length) {
+                const progress = (stepNumber / steps.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            
+            currentStep = stepNumber;
+            updateControlButtons();
         }
         
-        function showClientDemo() {
-            // This would normally navigate to the client demo page
-            window.open('client-demo.html', '_blank');
+        function updateControlButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentStep <= 1;
+            nextBtn.disabled = currentStep >= 5;
+        }
+        
+        function nextStep() {
+            userInteracted = true;
+            pauseAnimation();
+            resetInactivityTimer();
+            
+            if (currentStep < 5) {
+                showStep(currentStep + 1);
+            }
+        }
+        
+        function previousStep() {
+            userInteracted = true;
+            pauseAnimation();
+            resetInactivityTimer();
+            
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+            }
+        }
+        
+        function resetInactivityTimer() {
+            if (inactivityTimeout) {
+                clearTimeout(inactivityTimeout);
+            }
+            
+            inactivityTimeout = setTimeout(() => {
+                userInteracted = false;
+                startAnimation();
+            }, 15000); // 15 seconds
+        }
+        
+        function startAnimation() {
+            if (isAnimating) return;
+            
+            isAnimating = true;
+            currentStep = 0;
+            
+            // Clear inactivity timer since we're auto-animating
+            if (inactivityTimeout) {
+                clearTimeout(inactivityTimeout);
+            }
+            
+            updateButtonStates();
+            
+            animationInterval = setInterval(() => {
+                currentStep++;
+                if (currentStep > 5) {
+                    currentStep = 1; // Loop back to step 1
+                }
+                showStep(currentStep);
+            }, 4000);
+        }
+        
+        function pauseAnimation() {
+            if (animationInterval) {
+                clearInterval(animationInterval);
+                isAnimating = false;
+            }
+        }
+        
+        function resetAnimation() {
+            if (animationInterval) {
+                clearInterval(animationInterval);
+            }
+            
+            if (inactivityTimeout) {
+                clearTimeout(inactivityTimeout);
+            }
+            
+            isAnimating = false;
+            currentStep = 0;
+            
+            const steps = document.querySelectorAll('.process-step');
+            const progressBar = document.getElementById('progressBar');
+            
+            steps.forEach(step => {
+                step.classList.remove('active', 'animate', 'exit-left');
+            });
+            
+            progressBar.style.width = '0%';
+            
+            updateButtonStates();
+            
+            // Start fresh animation without showing step 1 first
+            setTimeout(() => {
+                if (!userInteracted) {
+                    startAnimation();
+                } else {
+                    showStep(1);
+                }
+            }, 500);
+        }
+        
+        function showAllSteps() {
+            pauseAnimation();
+            
+            const steps = document.querySelectorAll('.process-step');
+            const progressBar = document.getElementById('progressBar');
+            
+            // For the sliding animation, just show the last step
+            showStep(5);
+            
+            progressBar.style.width = '100%';
+            currentStep = 5;
+        }
+        
+        function updateButtonStates() {
+            // Removed button state management since buttons are removed
         }
         
         // Smooth scrolling for navigation links
@@ -459,6 +870,17 @@
             } else {
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
+        });
+        
+        // Click to activate individual steps
+        document.querySelectorAll('.process-step').forEach(step => {
+            step.addEventListener('click', function() {
+                userInteracted = true;
+                pauseAnimation();
+                resetInactivityTimer();
+                const stepNumber = parseInt(this.getAttribute('data-step'));
+                showStep(stepNumber);
+            });
         });
     </script>
 </body>
