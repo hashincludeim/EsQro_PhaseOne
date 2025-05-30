@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - Esqro Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: #f5f6fa;
+            color: #2c3e50;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 120px 2rem 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            padding: 60px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .faq-container {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .faq-question {
+            background: #3498db;
+            color: white;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .faq-question:hover {
+            background: #2980b9;
+        }
+        
+        .faq-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            color: #5a6c7d;
+            line-height: 1.8;
+            margin: 0;
+        }
+        
+        .placeholder-text {
+            background: white;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 3rem;
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 40px 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ESQRO</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#compliance">Compliance</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="implementation.html">Implementation</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Your questions answered about Qatar's smart escrow solution</p>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Why should businesses choose Esqro over traditional escrow services?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Esqro eliminates transaction risk and builds trust between business parties by acting as a neutral intermediary that holds funds securely until contract conditions are met. Unlike traditional escrow services, our platform offers automated execution through smart contracts, real-time transparency, faster processing times, and lower fees while maintaining full Sharia compliance. Businesses benefit from reduced counterparty risk, streamlined payment processes, digital contract management, and the assurance that funds are only released when agreed-upon milestones or conditions are fulfilled.</p>
+                    <p>For example, if a buyer is purchasing products from a supplier, the buyer can be assured that payment will only be released once the order is completed and delivered according to specifications. Meanwhile, the supplier has the guarantee that they will be paid immediately upon fulfilling their obligations, without delays or payment disputes.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What advantages does blockchain technology offer compared to conventional escrow methods?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Blockchain provides immutable transaction records, automated execution through smart contracts, and complete transparency that traditional escrow cannot match. The distributed ledger ensures all parties have real-time visibility into transaction status, creates an unchangeable audit trail, and reduces operational costs through automation. Additionally, smart contracts enable complex conditional logic and milestone-based payments that would be cumbersome and expensive to manage manually in traditional escrow systems.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How does Esqro ensure transparency while maintaining security on a private blockchain?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The private blockchain maintains transparency through a secure client portal where all authorized parties can view real-time transaction status, contract milestones, and payment histories in an easy-to-understand dashboard. While the underlying blockchain infrastructure remains private for security and compliance reasons, clients receive detailed transaction logs, automated notifications for every contract action, and access to immutable records of all activities related to their agreements. This approach provides the transparency benefits of blockchain technology while maintaining the privacy and regulatory compliance required for B2B transactions in Qatar's business environment.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Can contract terms be modified after a smart contract has been created?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>No, once a smart contract is deployed and agreed upon by both parties, the terms cannot be changed due to the immutable nature of blockchain technology. This immutability is actually a key security feature that prevents unauthorized modifications and ensures all parties can trust that the original agreement will be executed exactly as specified. If changes are needed, parties must mutually agree to terminate the existing contract and create a new one with updated terms, ensuring complete transparency and consent from all involved parties.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How are disputes between parties resolved on the platform?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>In Phase 1, disputes are handled through our internal mediation process where both parties can present their case along with supporting documentation uploaded to the platform. Our team reviews the contract terms, evidence provided, and facilitates resolution between the parties. If mediation fails, the dispute can be escalated to Qatar's traditional legal system or arbitration as specified in the original contract. The smart contract remains locked during dispute resolution to protect both parties' interests.</p>
+                    <p>In future phases, we plan to integrate automated dispute resolution mechanisms and third-party arbitrators directly into the platform for faster resolution. This will be possible by using custom built oracles and using APIs to connect with ERP tools that our clients use.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What security measures protect client funds from cyber threats and hacking attempts?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Client funds are protected through multiple layers of security: all fiat currency is held in regulated Qatar bank accounts rather than on the blockchain, eliminating the risk of cryptocurrency exchange hacks. Our private blockchain will use enterprise-grade encryption and access controls. We aim to implement multi-signature authorization for fund transfers, regular security penetration testing, and maintain insurance coverage for operational risks during later phases of our product.</p>
+                    <p>Additionally, our tokenization system ensures that even if the platform were compromised, attackers cannot directly access the underlying fiat currency held in traditional banking infrastructure, providing an extra layer of protection that pure cryptocurrency platforms cannot offer.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What licenses and regulatory approvals does Esqro need to operate legally?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Under Article 18 of Qatar Financial Centre's Digital Asset Regulations 2024, our tokenization platform would require multiple licenses to operate legally:</p>
+                    <p><strong>Required QFC Licenses:</strong></p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>Validation License - To confirm ownership of rights and issue certificates of validation for assets being tokenized</li>
+                        <li>Token Generation License - To create tokens on blockchain infrastructure representing underlying assets</li>
+                        <li>Token Custody Services License - To hold and control tokens on behalf of clients, including managing private keys and transaction capabilities</li>
+                        <li>Token Exchange License - To operate our trading platform that brings together buyers and sellers of tokenized assets</li>
+                        <li>Token Transfer Services License - To facilitate the transfer of tokens between parties</li>
+                    </ul>
+                    <p><strong>Banking and Financial Services:</strong> Given that we hold client fiat currency in Qatar bank accounts, we would need appropriate banking partnerships and potentially additional financial services licenses depending on the structure of our custody arrangements.</p>
+                    <p><strong>Compliance Requirements:</strong> The regulations require licensed entities to have adequate systems to prevent conflicts of interest when providing multiple token services, and all operations must comply with the QFC's technology guidance for token infrastructure. We want to engage with QFC regulatory counsel to obtain definitive guidance on the complete licensing framework required for our specific business model.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How does Esqro plan to attract and onboard new clients?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We'll target Qatar's key business sectors including construction, consulting, real estate and government contractors who frequently deal with milestone-based payments and need secure escrow services. Our approach includes partnering with local business associations, chambers of commerce, and legal firms who can refer clients requiring escrow services. We'll also leverage Qatar's digital transformation initiatives by positioning ourselves as a modern solution for traditional business challenges. Direct sales to large enterprises, participation in Qatar's fintech ecosystem events, and demonstrating cost savings compared to traditional escrow services will be key acquisition tactics.</p>
+                    <p>New clients will receive personalized onboarding sessions covering platform functionality, security protocols, and best practices for tokenized asset management. We offer ongoing training webinars and educational resources to help clients maximize platform benefits and stay current with new features.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How does the platform handle situations where a company cannot make full upfront payments?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>When Company A cannot pay the full amount upfront, our platform accommodates installment payments through an automated escrow notification system. Upon contract initiation, Company A receives notifications to deposit their scheduled payment amounts into the designated escrow account, which then triggers the generation of corresponding tokens that are sent to the smart contract. The system sends timely reminders for upcoming payment deadlines to ensure compliance with the agreed schedule.</p>
+                    <p>Meanwhile, Company B receives real-time notifications about the smart contract's status, including confirmation of each payment received, tokens generated, and overall contract progress. This approach maintains transparency for both parties while allowing flexible payment terms, with the smart contract automatically updating to reflect the current funding status and releasing deliverables or milestones as payments are completed according to the predetermined schedule.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Is there a risk of tokens being permanently locked in escrow contracts?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, tokens can be indefinitely locked in escrow due to poorly written smart contracts or unforeseen technical issues. However, our platform implements a comprehensive fail-safe mechanism to prevent permanent token lockup. We have built-in administrative controls that allow us to move tokens from the smart contract to a secure admin account in exceptional circumstances where the contract cannot execute properly or parties cannot resolve disputes through normal channels.</p>
+                    <p>This emergency intervention capability is designed as a last resort measure and will be used sparingly, with proper governance protocols and documentation for any such action. Our primary objective is to ensure smart contracts execute automatically as intended, but this fail-safe provides essential protection for users' assets while maintaining the integrity and security of the tokenization process.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What features and capabilities will the complete Esqro platform include?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The final Esqro platform will be a comprehensive end-to-end solution featuring multiple integrated components. Users will access an intuitive web-based dashboard where they can create, manage, and monitor tokenized contracts with real-time status updates and automated notifications. We will be looking to develop oracles and integrate with popular ERP tools that our clients use so that we can enable more functionalities on the platform and move away from the traditional methods of escrow.</p>
+                    <p>Smart contract templates will be available for various asset types and business scenarios, with customizable terms and automated execution based on predefined conditions. The system incorporates robust custody services for secure token storage, multi-signature wallet integration, and comprehensive escrow management with flexible payment scheduling. Advanced features include automated compliance checking, audit trails, dispute resolution mechanisms, and integration with traditional banking systems for seamless fiat-to-token conversions.</p>
+                    <p>The platform will also offer API access for enterprise clients, mobile applications for on-the-go management and analytics dashboards for spend analysis. All components will be unified under a single, secure infrastructure with enterprise-grade security, regulatory compliance tools, and 24/7 monitoring capabilities.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Is Esqro a cryptocurrency platform, and how does it differ from traditional crypto services?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>No, our platform is not a cryptocurrency. While we utilize blockchain technology, there are fundamental differences between our tokenization platform and traditional cryptocurrencies. Cryptocurrencies like Bitcoin or Ethereum are digital currencies designed as alternatives to fiat money and primarily serve as mediums of exchange or stores of value. In contrast, our platform creates asset-backed tokens that represent ownership rights in real-world assets such as real estate, commodities, contracts, or business agreements.</p>
+                    <p>Each token on our platform is tied to a specific underlying asset with intrinsic value, whereas cryptocurrencies typically derive value from market speculation and adoption. Our tokens are purpose-built for specific business transactions and contractual relationships, with predetermined terms and conditions embedded in smart contracts. The platform focuses on digitizing and automating traditional business processes rather than creating a new form of currency.</p>
+                    <p>Additionally, our tokens are designed to comply with regulatory frameworks for asset tokenization and may have restricted transferability based on the underlying asset's nature, unlike cryptocurrencies which are generally designed for open, permissionless trading. Essentially, we're using blockchain as a tool to modernize asset management and business transactions, not to create an alternative monetary system.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item !== answer) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            document.querySelectorAll('.faq-toggle').forEach(item => {
+                if (item !== toggle) {
+                    item.style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Toggle current FAQ
+            answer.classList.toggle('active');
+            toggle.style.transform = answer.classList.contains('active') ? 'rotate(45deg)' : 'rotate(0deg)';
+        }
+    </script>
+</body>
+</html>
